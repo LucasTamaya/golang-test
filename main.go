@@ -3,23 +3,25 @@ package main
 import "fmt"
 
 func main() {
-	// here we specify explicitly the type of the variable
-	var name string = "Pedro"
-	// but GO can do it by its own
-	var nameTwo = "John"
+	// the Println print by going to the line at the end
+	fmt.Println("Another print with fmt.Println()")
+	fmt.Println("Another print with fmt.Println()")
 
-	// the fast way to init a var is like so, but we can use this method only in function
-	nameThree := "Guigui"
+	// the Print do the same but without going to the line at the end
+	fmt.Print("Print with fmt.Print() ")
+	fmt.Print("Print with fmt.Print()\n")
 
-	fmt.Println(name, nameTwo, nameThree)
+	name := "John Doe"
 
-	// like Python, GO has int and float numbers
+	// the PrintF allow us to print with variables thanks to this
+	// format specifier %v will take the name in parameter
+	fmt.Printf("Hello %v \n", name)
 
-	// int number
-	intNumber := 15
+	// %T: to print the type of variable in parameter
+	fmt.Printf("The name variable is of type %T", name)
 
-	// float number
-	floatNumber := 10.2
+	// %f: to print float numbers: we can specify decimals if we put
+	// 0.1 or 0.2 etc.. => %0.2f = rounded to 2 decimals
 
-	fmt.Println(intNumber, floatNumber)
+	// We can pass multiple variable and multiple format specifier
 }
