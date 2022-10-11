@@ -3,8 +3,21 @@ package main
 import "fmt"
 
 func main() {
-	// we access to the sum function from the sum.go file
-	// but we have to run those two files: run go main.go sum.go
-	theSum := sum(10, 20)
-	fmt.Println(theSum)
+
+	// maps are like dict in Python or object in JS
+	// we specify the type of the key and the type of values
+	menu := map[string]int{
+		"burger": 40,
+		"pizzas": 20,
+		"sodas":  10,
+	}
+
+	fmt.Println(menu)
+	fmt.Println(menu["sodas"])
+
+	// loops throught maps
+
+	for k, v := range menu {
+		fmt.Println(k, ":", v)
+	}
 }
