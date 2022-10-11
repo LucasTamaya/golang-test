@@ -3,25 +3,35 @@ package main
 import "fmt"
 
 func main() {
-	// the Println print by going to the line at the end
-	fmt.Println("Another print with fmt.Println()")
-	fmt.Println("Another print with fmt.Println()")
 
-	// the Print do the same but without going to the line at the end
-	fmt.Print("Print with fmt.Print() ")
-	fmt.Print("Print with fmt.Print()\n")
+	// arrays
+	// in GO, an array has a defined length that can't be change. It has also the type of values
+	// that are going to be inside the array
+	ages := [3]int{1, 2, 3}
 
-	name := "John Doe"
+	names := [3]string{"John", "Koko", "Lolo"}
 
-	// the PrintF allow us to print with variables thanks to this
-	// format specifier %v will take the name in parameter
-	fmt.Printf("Hello %v \n", name)
+	fmt.Println(ages, len(ages))
+	fmt.Println(names, len(names))
 
-	// %T: to print the type of variable in parameter
-	fmt.Printf("The name variable is of type %T", name)
+	// slices
+	// slices are like arrays in JS or Python. We just have to specify the type value but the length
+	// can change
 
-	// %f: to print float numbers: we can specify decimals if we put
-	// 0.1 or 0.2 etc.. => %0.2f = rounded to 2 decimals
+	slices := []int{1, 2, 3, 4, 5}
 
-	// We can pass multiple variable and multiple format specifier
+	// to add element to array
+	slices = append(slices, 10)
+
+	// to get the last element of an array
+	lastSlices := slices[len(slices)-1]
+
+	fmt.Println(slices)
+	fmt.Println(lastSlices)
+
+	// slices ranges
+
+	ranges := slices[0:2]
+	fmt.Println(ranges)
+
 }
