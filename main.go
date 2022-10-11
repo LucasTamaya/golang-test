@@ -4,34 +4,31 @@ import "fmt"
 
 func main() {
 
-	// arrays
-	// in GO, an array has a defined length that can't be change. It has also the type of values
-	// that are going to be inside the array
-	ages := [3]int{1, 2, 3}
+	compteur := 0
 
-	names := [3]string{"John", "Koko", "Lolo"}
+	for compteur <= 10 {
+		fmt.Println(compteur)
 
-	fmt.Println(ages, len(ages))
-	fmt.Println(names, len(names))
+		if compteur == 10 {
+			fmt.Println("BOOM")
+			compteur++
+			break
+		}
 
-	// slices
-	// slices are like arrays in JS or Python. We just have to specify the type value but the length
-	// can change
+		compteur++
+	}
 
-	slices := []int{1, 2, 3, 4, 5}
+	names := []string{"Jojo", "Lolo", "Koko"}
+	ages := []int{10, 15, 20}
 
-	// to add element to array
-	slices = append(slices, 10)
+	// loop throught an array with index and value
+	for index, value := range names {
+		fmt.Printf("The index is %v, and the value is %v \n", index, value)
+	}
 
-	// to get the last element of an array
-	lastSlices := slices[len(slices)-1]
-
-	fmt.Println(slices)
-	fmt.Println(lastSlices)
-
-	// slices ranges
-
-	ranges := slices[0:2]
-	fmt.Println(ranges)
+	// loop just throught value
+	for _, value := range ages {
+		fmt.Printf("The age is %v \n", value)
+	}
 
 }
