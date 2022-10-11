@@ -63,6 +63,39 @@ func addTodo(ctx *gin.Context) {
 	ctx.IndentedJSON(http.StatusCreated, newTodo)
 }
 
+func updateTodo(ctx *gin.Context) {
+	var newData todo
+
+	// get the body of the req and append it to newData's pointer
+	if err := ctx.BindJSON(&newData); err != nil {
+		return
+	}
+
+	// get the id in the url
+	id := ctx.Param("id")
+
+	todo, err := getTodoById(id)
+
+	if err != nil {
+		ctx.IndentedJSON(http.StatusNotFound, gin.H{"message": "Todo not found :("})
+		return
+	}
+
+	// if we found a pointer for the Completed props, we update the todo.Completed
+	if &newData.Completed != nil {
+		todo.Completed = newData.Completed
+	}
+
+	// if we found a pointer for the Item props, we update the todo.Item
+	if &newData.Item != nil {
+		todo.Item = newData.Item
+	}
+
+	// finally we return the updated todo
+	ctx.IndentedJSON(http.StatusOK, todo)
+
+}
+
 func main() {
 	// create the router
 	router := gin.Default()
@@ -70,6 +103,7 @@ func main() {
 	// create some routes
 	router.GET("/todos", getTodos)
 	router.GET("/todos/:id", getSingleTodo)
+	router.PATCH("/todos/:id", updateTodo)
 	router.POST("/todos", addTodo)
 
 	// run the app at localhost port 8080
