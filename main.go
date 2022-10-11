@@ -4,6 +4,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+
+	"errors"
 )
 
 type todo struct {
@@ -21,6 +23,30 @@ var todos = []todo{
 func getTodos(ctx *gin.Context) {
 	// return the todos with JSON format
 	ctx.IndentedJSON(http.StatusOK, todos)
+}
+
+func getSingleTodo(ctx *gin.Context) {
+	// get the id in the url params
+	id := ctx.Param("id")
+	todo, err := getTodoById(id)
+
+	// if we don't found the todo, return this message
+	if err != nil {
+		ctx.IndentedJSON(http.StatusNotFound, gin.H{"message": "Todo not found"})
+		return
+	}
+
+	// if we found the todo
+	ctx.IndentedJSON(http.StatusOK, todo)
+}
+
+func getTodoById(id string) (*todo, error) {
+	for i, t := range todos {
+		if t.ID == id {
+			return &todos[i], nil
+		}
+	}
+	return nil, errors.New("Todo not found")
 }
 
 func addTodo(ctx *gin.Context) {
@@ -43,7 +69,7 @@ func main() {
 
 	// create some routes
 	router.GET("/todos", getTodos)
-	router.GET("/todos")
+	router.GET("/todos/:id", getSingleTodo)
 	router.POST("/todos", addTodo)
 
 	// run the app at localhost port 8080
