@@ -1,23 +1,13 @@
 package main
 
-import (
-	"fmt"
-)
-
-func updateNameByMemoryAddress(v *string) {
-	*v = "wedge"
-}
+import "fmt"
 
 func main() {
-	name := "John"
 
-	// $var allow us to access to the memory address of variables
-	fmt.Println("The memory address of name is", &name)
+	myBill := newBill("John Doe's bill")
 
-	nameMemoryValue := &name
-	// *&name allow us to acces to the value of a memory address
+	fmt.Println(myBill)
 
-	updateNameByMemoryAddress(nameMemoryValue)
+	myBill.format()
 
-	fmt.Println(name)
 }
